@@ -1,3 +1,7 @@
+CAUTION: Although I, and the other authors have been ensuring this is a fool-proof tool. There may be typing errors for the private code (the 64 hex char) shifting . If found, please contact me ,or study the source code of the client.
+
+
+
 Brainwallet
 ===========
 
