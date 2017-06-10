@@ -1,6 +1,16 @@
 Updated on 10 June 2017
-This is for archival only, According to Ryan's suggestion, DO NOT USE The Passphrase function in the program when in use.
+This is for archival only, According to Ryan Castellucci's suggestion, DO NOT USE The Passphrase function for production or daily use, You should use BIP-44 or Warp-Wallet for the thing.
 
+The remain function is for code forming, message signing even creating txid...
+
+Tipping: 1HQaXBiPQwwkHAtBfXtt9P9FEFqTKK91pT
+
+Support: 1M2bCkKAWghqtpR8iMdKLH84sNM1jndxA
+
+
+
+
+===========
 
 WARNING: THIS IS A DUAL-USE TOOL WHICH CAN BE DANGEROUS AS YOU CAN INPUT A SUITABLE 64HEX RAW CODE TO FIND OUT WHAT YOU ACTUALLY NEED, SOME COMBINATIONS WORTH, YOU HAVE BEEN WARNED.
 
