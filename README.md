@@ -8,6 +8,14 @@ Tipping: 1HQaXBiPQwwkHAtBfXtt9P9FEFqTKK91pT
 Support: 1M2bCkKAWghqtpR8iMdKLH84sNM1jndxA
 
 
+P.S
+
+During the time, I just have learnt a trick, If branches here, There are many copies from the Old branches, Just need to find very carefully.
+
+This is the last known branch of the Orginial.
+https://github.com/brainwallet/brainwallet.github.io/tree/f7679dd03f39a04edced641960a7c3df1116fea9
+
+
 
 
 ===========
