@@ -1,4 +1,4 @@
-Updated on 10 June 2017
+Updated on 17 June 2017
 This is for archival only, According to Ryan Castellucci's suggestion, DO NOT USE The Passphrase function for production or daily use, You should use BIP-44 or Warp-Wallet for the thing.
 
 The remain function is for code forming, message signing even creating txid...
@@ -12,7 +12,7 @@ P.S
 
 During the time, I just have learnt a trick, If branches here, There are many copies from the Old branches, Just need to find very carefully.
 
-This is the last known branch of the Orginial.
+This is the last known branch of the Before saying down.
 https://github.com/brainwallet/brainwallet.github.io/tree/f7679dd03f39a04edced641960a7c3df1116fea9
 
 
