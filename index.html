@@ -112,12 +112,13 @@
               <div class="form-group">
                 <label class="col-lg-2 control-label" for="hash">Secret Exponent</label>
                 <div class="col-lg-10 controls">
-                  <div class="input-group">
+                  <!-- div class="input-group">
                     <input class="form-control" id="hash" maxlength="64" readonly="readonly" type="text" spellcheck="false" title="SHA256(Passphrase), 256-bit ECDSA private key" type="text"/>
                     <div class="input-group-btn">
                       <button class="btn btn-default" id="genRandom" title="Uses cryptographically-strong window.crypto. Disabled on unsupported browsers." type="button" disabled="disabled">Secure Random</button>
                     </div>
-                  </div>
+                  </div -->
+                  <input class="form-control" id="hash" maxlength="64" readonly="readonly" type="text" spellcheck="false" title="SHA256(Passphrase), 256-bit ECDSA private key" type="text"/>
                 </div>
               </div>
               <div class="form-group">
@@ -411,6 +412,7 @@
               <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10 controls">
                   <button class="btn btn-default" id="sgSign" title="Signatures require a random number which means signing the same data twice results in different sigs" type="button">Sign Message</button>
+                  &nbsp;&nbsp;<span class="help-inline" id="sgLabel"></span>
                 </div>
               </div>
             </fieldset>
@@ -456,7 +458,7 @@
               <div class="form-group vrSig" hidden>
                 <label class="col-lg-2 control-label" for="vrSig">Signature</label>
                 <div class="col-lg-10 controls">
-                  <input class="form-control" id="vrSig" type="text"/>
+                  <input class="form-control" id="vrSig" spellcheck="false" type="text"/>
                 </div>
               </div>
             </fieldset>
