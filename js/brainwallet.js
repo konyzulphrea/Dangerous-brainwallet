@@ -126,7 +126,7 @@
     }
 
     function setErrorState(field, err, msg) {
-        var group = field.closest('.controls');
+        var group = field.closest('.controls').parent();
         if (err) {
             group.addClass('has-error');
             group.attr('title',msg);
@@ -316,7 +316,7 @@
         if (version != PRIVATE_KEY_VERSION) {
             setErrorState($('#sec'), true, 'Invalid private key version');
             return;
-        } else if (payload.length < 32) {
+        } else if (payload.length != 32 && payload.length != 33) {
             setErrorState($('#sec'), true, 'Invalid payload (must be 32 or 33 bytes)');
             return;
         }
@@ -1284,6 +1284,10 @@
             var res = parseBase58Check(sec); 
             var privkey_version = res[0];
             var payload = res[1];
+
+            if (payload.length!=32 && payload.length!=33)
+              throw ('Invalid payload (must be 32 or 33 bytes)');
+
             if (payload.length > 32) {
                 payload.pop();
                 compressed = true;
@@ -1304,7 +1308,7 @@
             }
         } catch (err) {
             if (from.val())
-              setErrorState(from, true, "Bad private key");
+              setErrorState(from, true, err);
             return false;
         }
         to.val(addr);
@@ -1317,8 +1321,14 @@
 
     function sgOnChangeSec() {
         $('#sgSig').val('');
+        $('#sgLabel').html('');
         clearTimeout(timeout);
         timeout = setTimeout(sgGenAddr, TIMEOUT);
+    }
+
+    function sgOnChangeMsg() {
+        $('#sgSig').val('');
+        $('#sgLabel').html('');
     }
 
     function fullTrim(message)
@@ -1361,11 +1371,17 @@
 
       sgMsg = fullTrim(sgMsg);
 
+      var label = '';
+
       if (sgType=='armory_base64' || sgType=='armory_clearsign' || sgType=='armory_hex') {
         $('#sgSig').val(armory_sign_message (p.key, p.address, sgMsg, p.compressed, p.addrtype, sgType));
       } else {
-        $('#sgSig').val(joinMessage(sgType, p.address, sgMsg, sign_message(p.key, sgMsg, p.compressed, p.addrtype)));
+        var sgSig = sign_message(p.key, sgMsg, p.compressed, p.addrtype);
+        $('#sgSig').val(joinMessage(sgType, p.address, sgMsg, sgSig));
+        label = '(<a href="#verify'+vrPermalink(p.address, sgMsg, sgSig)+'" target=_blank>permalink</a>)';
       }
+
+      $('#sgLabel').html(label);
     }
 
     // -- verify --
@@ -1456,6 +1472,7 @@
           return;
 
         var addr = null;
+        var p = null;
 
         if (bSplit) {
           p = splitMessage(vrMsg);
@@ -1465,6 +1482,8 @@
 
           // try armory first
           addr = armory_verify_message(p);
+        } else {
+          p = { "type": "bitcoin_qt", "address":vrAddr, "message": vrMsg, "signature": vrSig };
         }
 
         if (!addr) {
@@ -1473,7 +1492,7 @@
         }
 
         var armoryMsg = "";
-        if (p && p.type=="armory_base64" && p.message) {
+        if (p.type=="armory_base64" && p.message) {
           armoryMsg = p.message;
           console.log(armoryMsg);
         }
@@ -1481,6 +1500,10 @@
         $('#vrAlert').empty();
 
         var clone = $('#vrError').clone();
+
+        // also check address was mentioned somewhere in the message (may be unsafe)
+        if (!vrAddr && addr && vrMsg.search(addr)!=-1)
+          vrAddr = addr;
 
         if (addr && (vrAddr==addr || !vrAddr)) {
           clone = vrAddr==addr ? $('#vrSuccess').clone() : $('#vrWarning').clone();
@@ -1509,7 +1532,6 @@
 
 
     function vrOnChange() {
-        window.location.hash='#verify';
         clearTimeout(timeout);
         timeout = setTimeout(vrOnInput, TIMEOUT);
     }
@@ -1628,7 +1650,7 @@
         $('#sgMsg').val("This is an example of a signed message.");
 
         onInput('#sgSec', sgOnChangeSec);
-        onInput('#sgMsg', function() { $('#sgSig').val(''); } );
+        onInput('#sgMsg', sgOnChangeMsg);
 
         $('#sgType label input').on('change', function() { if ($('#sgSig').val()!='') sgSign(); } );
 
