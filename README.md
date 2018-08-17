@@ -3,10 +3,6 @@ This is for archival only, According to Ryan Castellucci's suggestion, DO NOT US
 
 The remain function is for code forming, message signing even creating txid...
 
-Tipping: 1HQaXBiPQwwkHAtBfXtt9P9FEFqTKK91pT
-
-Support: 1M2bCkKAWghqtpR8iMdKLH84sNM1jndxA
-
 
 P.S
 
